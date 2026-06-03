@@ -1,188 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Based Skill Gap Analyzer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>AI Skill Gap Analyzer</title>
+
+<meta name="description"
+content="Analyze skill gaps and generate personalized learning paths for your target career role">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Better loading -->
+<script src="script.js" defer></script>
+
 </head>
+
 <body>
-  <div class="page-shell">
-    <header class="hero">
-      <nav class="topbar">
-        <div class="brand">
-          <span class="brand-mark">SS</span>
-          <div>
-            <p>Skill Gap AI</p>
-            <span>Learning Path Generator</span>
-          </div>
-        </div>
-        <a class="ghost-link" href="#analyzer">Launch Analyzer</a>
-      </nav>
 
-      <section class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">AI-Based Skill Gap Analyzer</p>
-          <h1>Find the missing subjects you need for your target job role.</h1>
-          <p class="hero-text">
-            Enter the job role you want and the skills you already know. The system compares your input with job-role,
-            skill metadata, and learning-resource datasets to suggest the subjects you should cover next.
-          </p>
-          <div class="hero-actions">
-            <a class="primary-btn" href="#analyzer">Analyze My Skills</a>
-            <a class="secondary-btn" href="#results">Preview Results</a>
-          </div>
-        </div>
+<div class="container">
 
-        <aside class="hero-card">
-          <p class="stat-label">What this project does</p>
-          <div class="stat-grid">
-            <article>
-              <strong>3</strong>
-              <span>CSV datasets</span>
-            </article>
-            <article>
-              <strong>AI</strong>
-              <span>gap analysis</span>
-            </article>
-            <article>
-              <strong>Jobs</strong>
-              <span>role matching</span>
-            </article>
-            <article>
-              <strong>Easy</strong>
-              <span>student project flow</span>
-            </article>
-          </div>
-          <div class="pulse-panel">
-            <span class="pulse-dot"></span>
-            <p>Dataset analyzer active</p>
-          </div>
-        </aside>
-      </section>
-    </header>
+<header class="hero">
 
-    <main>
-      <section class="panel analyzer-panel" id="analyzer">
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">Step 1</p>
-            <h2>Enter your target role and known skills</h2>
-          </div>
-          <p class="panel-note">
-            Use comma-separated skills like python, sql, statistics. The analyzer will show matched skills,
-            missing subjects, and learning links.
-          </p>
-        </div>
+<nav class="topbar">
 
-        <form id="analyzerForm">
-          <div class="form-grid">
-            <label>
-              <span>Target Role</span>
-              <select id="targetRole" required></select>
-            </label>
+<div class="brand">
 
-            <label>
-              <span>Your Known Skills</span>
-              <textarea id="knownSkills" rows="5" placeholder="python, sql, machine learning" required></textarea>
-            </label>
+<span class="brand-mark">SS</span>
 
-            <label>
-              <span>Your Name</span>
-              <input id="studentName" type="text" placeholder="Enter your name">
-            </label>
+<div class="brand-content">
+<h1>Skill Gap AI</h1>
+<span>Learning Path Generator</span>
+</div>
 
-            <label>
-              <span>Goal Level</span>
-              <select id="goalLevel" required>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
-              </select>
-            </label>
-          </div>
+</div>
 
-          <div class="skills-header">
-            <div>
-              <p class="eyebrow">Step 2</p>
-              <h3>Run skill gap analysis</h3>
-            </div>
-            <button class="secondary-btn compact" type="button" id="sampleProfileBtn">Load Sample Input</button>
-          </div>
+<a href="#analyzer" class="ghost-link">
+Launch Analyzer
+</a>
 
-          <button class="primary-btn submit-btn" type="submit">Generate Learning Path</button>
-        </form>
-      </section>
+</nav>
 
-      <section class="panel results-panel" id="results">
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">Step 3</p>
-            <h2>Your personalized analysis</h2>
-          </div>
-          <p class="panel-note">Your results update instantly after each analysis.</p>
-        </div>
+<section class="hero-grid">
 
-        <div class="results-grid">
-          <article class="summary-card accent-card">
-            <span>Match score</span>
-            <strong id="readinessScore">0%</strong>
-            <p id="summaryText">Fill out the analyzer to generate role-wise subject recommendations.</p>
-          </article>
+<div class="hero-copy">
 
-          <article class="summary-card">
-            <span>Matched skills</span>
-            <ul id="strengthList" class="tag-list"></ul>
-          </article>
+<p class="eyebrow">
+AI-Based Skill Gap Analyzer
+</p>
 
-          <article class="summary-card">
-            <span>Missing subjects</span>
-            <ul id="gapList" class="tag-list"></ul>
-          </article>
-        </div>
+<h2>
+Find missing skills required for your target career
+</h2>
 
-        <div class="deep-dive-grid">
-          <article class="detail-card">
-            <div class="card-head">
-              <h3>Required skills for selected role</h3>
-              <p>Compared with your known skills</p>
-            </div>
-            <div id="skillGapBars" class="gap-bars"></div>
-          </article>
+<p class="hero-text">
+Enter your desired job role and existing skills.
+The system compares your profile with datasets and
+generates personalized recommendations.
+</p>
 
-          <article class="detail-card">
-            <div class="card-head">
-              <h3>Suggested learning order</h3>
-              <p>Simple subject-by-subject roadmap</p>
-            </div>
-            <div id="roadmap" class="roadmap"></div>
-          </article>
-        </div>
+<div class="hero-actions">
 
-        <div class="deep-dive-grid">
-          <article class="detail-card">
-            <div class="card-head">
-              <h3>Skill details</h3>
-              <p>Category and difficulty from metadata</p>
-            </div>
-            <div id="projectList" class="resource-list"></div>
-          </article>
+<a href="#analyzer"
+class="primary-btn">
+Analyze Skills
+</a>
 
-          <article class="detail-card">
-            <div class="card-head">
-              <h3>Recommended resources</h3>
-              <p>Picked from your learning dataset</p>
-            </div>
-            <div id="resourceList" class="resource-list"></div>
-          </article>
-        </div>
-      </section>
-    </main>
-  </div>
+<a href="#results"
+class="secondary-btn">
+Preview Results
+</a>
 
-  <script src="script.js"></script>
+</div>
+
+</div>
+
+
+<aside class="hero-card">
+
+<p class="stat-label">
+System Features
+</p>
+
+<div class="stat-grid">
+
+<article>
+<strong>3+</strong>
+<span>Datasets</span>
+</article>
+
+<article>
+<strong>AI</strong>
+<span>Analysis</span>
+</article>
+
+<article>
+<strong>Jobs</strong>
+<span>Role Matching</span>
+</article>
+
+<article>
+<strong>Fast</strong>
+<span>Real-time</span>
+</article>
+
+</div>
+
+<div class="pulse-panel">
+
+<span class="pulse-dot"></span>
+
+<p>
+Analyzer Active
+</p>
+
+</div>
+
+</aside>
+
+</section>
+
+</header>
+
+
+<main>
+
+<section class="panel analyzer-panel"
+id="analyzer">
+
+<div class="panel-heading">
+
+<div>
+
+<p class="eyebrow">
+Step 1
+</p>
+
+<h2>
+Enter Details
+</h2>
+
+</div>
+
+<p class="panel-note">
+Use comma-separated skills
+(example: Python, SQL, Machine Learning)
+</p>
+
+</div>
+
+
+<form id="analyzerForm">
+
+<div class="form-grid">
+
+<div class="input-group">
+
+<label for="targetRole">
+Target Role
+</label>
+
+<select
+id="targetRole"
+required
+aria-label="Target Role">
+
+</select>
+
+</div>
+
+
+<div class="input-group">
+
+<label for="knownSkills">
+Known Skills
+</label>
+
+<textarea
+id="knownSkills"
+rows="5"
+required
+placeholder="python, sql, machine learning"
+aria-label="Known Skills">
+</textarea>
+
+</div>
+
+
+<div class="input-group">
+
+<label for="studentName">
+Name
+</label>
+
+<input
+type="text"
+id="studentName"
+placeholder="Enter your name">
+
+</div>
+
+
+<div class="input-group">
+
+<label for="goalLevel">
+Goal Level
+</label>
+
+<select
+id="goalLevel"
+required>
+
+<option value="beginner">
+Beginner
+</option>
+
+<option value="intermediate">
+Intermediate
+</option>
+
+<option value="advanced">
+Advanced
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="skills-header">
+
+<div>
+
+<p class="eyebrow">
+Step 2
+</p>
+
+<h3>
+Run Analysis
+</h3>
+
+</div>
+
+<button
+type="button"
+class="secondary-btn compact"
+id="sampleProfileBtn">
+
+Load Sample
+
+</button>
+
+</div>
+
+<button
+class="primary-btn submit-btn"
+type="submit">
+
+Generate Learning Path
+
+</button>
+
+</form>
+
+</section>
+
+
+
+<section
+class="panel results-panel"
+id="results">
+
+<div class="panel-heading">
+
+<div>
+
+<p class="eyebrow">
+Step 3
+</p>
+
+<h2>
+Results
+</h2>
+
+</div>
+
+<p class="panel-note">
+
+Results update automatically
+
+</p>
+
+</div>
+
+
+<div class="results-grid">
+
+<article class="summary-card accent-card">
+
+<span>
+Match Score
+</span>
+
+<strong id="readinessScore">
+0%
+</strong>
+
+<p id="summaryText">
+
+Complete analysis to view results
+
+</p>
+
+</article>
+
+
+<article class="summary-card">
+
+<span>
+Matched Skills
+</span>
+
+<ul id="strengthList"
+class="tag-list"></ul>
+
+</article>
+
+
+<article class="summary-card">
+
+<span>
+Missing Skills
+</span>
+
+<ul id="gapList"
+class="tag-list"></ul>
+
+</article>
+
+</div>
+
+
+
+<div class="deep-dive-grid">
+
+<article class="detail-card">
+
+<div class="card-head">
+
+<h3>
+Required Skills
+</h3>
+
+<p>
+Compared with your profile
+</p>
+
+</div>
+
+<div id="skillGapBars"></div>
+
+</article>
+
+
+
+<article class="detail-card">
+
+<div class="card-head">
+
+<h3>
+Learning Roadmap
+</h3>
+
+<p>
+Suggested order
+</p>
+
+</div>
+
+<div id="roadmap"></div>
+
+</article>
+
+</div>
+
+
+
+<div class="deep-dive-grid">
+
+<article class="detail-card">
+
+<div class="card-head">
+
+<h3>
+Skill Metadata
+</h3>
+
+<p>
+Difficulty and category
+</p>
+
+</div>
+
+<div id="projectList"></div>
+
+</article>
+
+
+
+<article class="detail-card">
+
+<div class="card-head">
+
+<h3>
+Resources
+</h3>
+
+<p>
+Recommended learning material
+</p>
+
+</div>
+
+<div id="resourceList"></div>
+
+</article>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
 </body>
 </html>
