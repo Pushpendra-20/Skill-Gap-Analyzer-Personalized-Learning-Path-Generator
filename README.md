@@ -32,9 +32,23 @@ skills_metadata.csv
 How It Works
 
 User selects a target job role.
+
+
+
+
+
+
 User enters current skills.
 System reads job-role skill dataset.
 It compares required skills with user skills.
 Missing skills are identified as the skill gap.
 Metadata and resource datasets are used to suggest learning difficulty, category, and study links.
 A simple learning path is generated in priority order.
+
+
+
+
+## Future Improvements
+- Add real AI API integration
+- Add authentication
+- Add personalized recommendations
