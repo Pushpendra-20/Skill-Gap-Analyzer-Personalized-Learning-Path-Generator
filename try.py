@@ -1,11 +1,14 @@
 import pandas as pd
 
+
 # Load datasets
+
 job = pd.read_csv("job_role_skills.csv")
 learning = pd.read_csv("learning_resources.csv")
 skills = pd.read_csv("skills_metadata.csv")
 
 # Clean text columns
+
 job["job_role"] = job["job_role"].astype(str).str.strip().str.lower()
 job["skill"] = job["skill"].astype(str).str.strip().str.lower()
 job["importance"] = job["importance"].astype(str).str.strip().str.lower()
@@ -18,14 +21,17 @@ skills["difficulty"] = skills["difficulty"].astype(str).str.strip().str.lower()
 skills["category"] = skills["category"].astype(str).str.strip().str.lower()
 
 # User input
+
 target_role = input("Enter Target Role Job: ").strip().lower()
 user_skills = input("Enter your skills (comma separated): ").split(",")
 
 # Remove extra spaces and duplicates
+
 user_skills = [s.strip().lower() for s in user_skills if s.strip()]
 user_skills = list(set(user_skills))
 
 # Check role exists
+
 all_roles = job["job_role"].unique().tolist()
 if target_role not in all_roles:
     print("\nRole not found in dataset.")
@@ -35,14 +41,17 @@ if target_role not in all_roles:
     exit()
 
 # Required skills for selected role
+
 required_df = job[job["job_role"] == target_role][["skill", "importance"]].drop_duplicates()
 required_skills = required_df["skill"].tolist()
 
 # Skill gap
+
 skill_gap = list(set(required_skills) - set(user_skills))
 matched_skills = list(set(required_skills).intersection(set(user_skills)))
 
 # Safe match score
+
 if len(required_skills) > 0:
     match_score = (len(matched_skills) / len(required_skills)) * 100
 else:
